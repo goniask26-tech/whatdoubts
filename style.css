@@ -206,43 +206,36 @@ header {
 }
 
 
-/* ==================================
-   BANNER
-================================== */
+/* =========================
+   BANNER SLIDESHOW
+========================= */
 
 .banner {
     position: relative;
-
     min-height: 430px;
     margin: 30px 5%;
+    overflow: hidden;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-
-    overflow: hidden;
 
     background: #f3f3f3;
 }
 
 
-/* ==================================
-   รูปพื้นหลัง
-================================== */
-
+/* กล่องที่ครอบรูปทั้งหมด */
 .banner-backgrounds {
     position: absolute;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     z-index: 1;
 }
 
 
+/* รูปพื้นหลังแต่ละรูป */
 .banner-bg {
     position: absolute;
     inset: 0;
@@ -256,33 +249,71 @@ header {
 
     opacity: 0;
 
-    transform: scale(1.03);
-
-    transition:
-        opacity 1.5s ease-in-out,
-        transform 6s ease;
+    transition: opacity 1.5s ease-in-out;
 }
 
 
 /* รูปที่กำลังแสดง */
-
 .banner-bg.active {
     opacity: 1;
-    transform: scale(1);
 }
 
 
-/* ==================================
-   เงาดำบนรูป
-================================== */
-
+/* เงาดำบาง ๆ */
 .banner-dark {
     position: absolute;
     inset: 0;
 
-    z-index: 2;
-
     background: rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+}
+
+
+/* ข้อความอยู่เหนือรูป */
+.banner-content {
+    position: relative;
+    z-index: 3;
+
+    padding: 30px;
+
+    color: white;
+}
+
+
+.banner-content h1 {
+    font-size: clamp(35px, 7vw, 80px);
+    font-weight: 800;
+
+    letter-spacing: 8px;
+
+    color: white;
+}
+
+
+.banner-content p {
+    margin-top: 15px;
+
+    letter-spacing: 6px;
+
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+.banner-content a {
+    display: inline-block;
+
+    margin-top: 35px;
+
+    padding: 14px 35px;
+
+    background: #111;
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    letter-spacing: 2px;
 }
 
 
