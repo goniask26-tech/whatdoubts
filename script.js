@@ -1210,7 +1210,60 @@ function changeProductImage(
         number + " / 4";
 }
 
+// =====================================
+// BANNER AUTO SLIDESHOW
+// =====================================
 
+const bannerBackgrounds =
+    document.querySelectorAll(".banner-bg");
+
+
+let currentBannerIndex = 0;
+
+
+function nextBanner() {
+
+    if (bannerBackgrounds.length <= 1) {
+        return;
+    }
+
+
+    // ซ่อนรูปปัจจุบัน
+    bannerBackgrounds[
+        currentBannerIndex
+    ].classList.remove("active");
+
+
+    // ไปรูปต่อไป
+    currentBannerIndex++;
+
+
+    // ถ้าถึงรูปสุดท้าย
+    // ให้กลับไปเริ่มรูปแรก
+    if (
+        currentBannerIndex >=
+        bannerBackgrounds.length
+    ) {
+
+        currentBannerIndex = 0;
+
+    }
+
+
+    // แสดงรูปใหม่
+    bannerBackgrounds[
+        currentBannerIndex
+    ].classList.add("active");
+
+}
+
+
+// เปลี่ยนรูปทุก 5 วินาที
+
+setInterval(
+    nextBanner,
+    5000
+);
 
 // ==================================================
 // เริ่มระบบ
