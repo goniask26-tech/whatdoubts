@@ -1,0 +1,11 @@
+whatdoubts
+└── clothing-store
+    ├── index.html
+    ├── style.css
+    ├── script.js
+    └── images
+        ├── 606912289_1714618669843103_8313920674180058790_n.jpg
+        ├── S__59162639_0.jpg
+        ├── S__59162640_0.jpg
+        ├── S__59162641_0.jpg
+        └── S__59162642_0.jpg

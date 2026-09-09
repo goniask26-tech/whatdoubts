@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>WHAT DOUBTS</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+
+    <!-- ==============================
+         SPLASH SCREEN
+    =============================== -->
+
+    <div id="splash-screen">
+
+        <img
+            src="images/606912289_1714618669843103_8313920674180058790_n.jpg"
+            class="splash-logo"
+            alt="WHAT DOUBTS"
+        >
+
+    </div>
+
+
+
+    <!-- ==============================
+         HEADER
+    =============================== -->
+
+    <header>
+
+        <div class="brand">
+            WHAT DOUBTS
+        </div>
+
+
+        <button
+            class="cart-button"
+            onclick="openCart()"
+        >
+            🛒 ตะกร้า
+
+            <span id="cart-count">
+                0
+            </span>
+        </button>
+
+    </header>
+
+
+
+    <!-- ==============================
+         CATEGORY
+    =============================== -->
+
+    <nav class="category-menu">
+
+        <button
+            class="category active"
+            onclick="showCategory('all', this)"
+        >
+            ทั้งหมด
+        </button>
+
+
+        <button
+            class="category"
+            onclick="showCategory('shirt', this)"
+        >
+            เสื้อ
+        </button>
+
+
+        <button
+            class="category"
+            onclick="showCategory('pants', this)"
+        >
+            กางเกง
+        </button>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         BANNER
+    =============================== -->
+
+    <section class="banner">
+
+        <h1>
+            WHAT DOUBTS
+        </h1>
+
+        <p>
+            NEW COLLECTION
+        </p>
+
+        <a href="#products">
+            SHOP NOW
+        </a>
+
+    </section>
+
+
+
+    <!-- ==============================
+         PRODUCTS
+    =============================== -->
+
+    <main id="products">
+
+        <div class="section-title">
+
+            <h2 id="category-title">
+                สินค้าทั้งหมด
+            </h2>
+
+            <p>
+                เลือกสินค้าที่คุณชอบ
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <!-- ======================
+                 เสื้อ 01
+            ======================= -->
+
+            <div
+                class="product"
+                data-category="shirt"
+            >
+
+                <img
+                    src="images/606912289_1714618669843103_8313920674180058790_n.jpg"
+                    alt="T-Shirt 01"
+                >
+
+
+                <div class="product-info">
+
+                    <p class="product-type">
+                        SHIRT
+                    </p>
+
+                    <h3>
+                        WHAT DOUBTS T-Shirt 01
+                    </h3>
+
+                    <p class="price">
+                        ฿390
+                    </p>
+
+                    <label>
+                        ไซซ์
+                    </label>
+
+                    <select id="size-shirt1">
+
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+
+                    </select>
+
+
+                    <button
+                        onclick="addToCart(
+                        'shirt1',
+                        'WHAT DOUBTS T-Shirt 01',
+                        390,
+                        650,
+                        'size-shirt1'
+                    )"
+                    >
+                        เพิ่มลงตะกร้า
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ======================
+                 เสื้อ 02
+            ======================= -->
+
+            <div
+                class="product"
+                data-category="shirt"
+            >
+
+                <img
+                    src="images/606912289_1714618669843103_8313920674180058790_n.jpg"
+                    alt="T-Shirt 02"
+                >
+
+
+                <div class="product-info">
+
+                    <p class="product-type">
+                        SHIRT
+                    </p>
+
+                    <h3>
+                        WHAT DOUBTS T-Shirt 02
+                    </h3>
+
+                    <p class="price">
+                        ฿450
+                    </p>
+
+                    <label>
+                        ไซซ์
+                    </label>
+
+                    <select id="size-shirt2">
+
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+
+                    </select>
+
+
+                    <button
+                        onclick="addToCart(
+                            'shirt2',
+                            'WHAT DOUBTS T-Shirt 02',
+                            450,
+                            650,
+                            'size-shirt2'
+                        )"
+                    >
+                        เพิ่มลงตะกร้า
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ======================
+                 กางเกง 01
+            ======================= -->
+
+            <div
+                class="product"
+                data-category="pants"
+            >
+
+                <div class="product-image-wrap">
+
+                    <img
+                        id="pants1-main-image"
+                        class="product-main-image"
+                        src="images/S__59162639_0.jpg"
+                        alt="Pants 01"
+                    >
+
+                    <div
+                        id="pants1-count"
+                        class="image-count"
+                    >
+                        1 / 4
+                    </div>
+
+                </div>
+
+
+                <div class="product-thumbnails">
+
+                    <img
+                        src="images/S__59162639_0.jpg"
+                        class="thumbnail active-thumbnail"
+                        onclick="changeProductImage(
+                            'pants1-main-image',
+                            this,
+                            'pants1-count',
+                            1
+                        )"
+                        alt="Pants image 1"
+                    >
+
+                    <img
+                        src="images/S__59162640_0.jpg"
+                        class="thumbnail"
+                        onclick="changeProductImage(
+                            'pants1-main-image',
+                            this,
+                            'pants1-count',
+                            2
+                        )"
+                        alt="Pants image 2"
+                    >
+
+                    <img
+                        src="images/S__59162641_0.jpg"
+                        class="thumbnail"
+                        onclick="changeProductImage(
+                            'pants1-main-image',
+                            this,
+                            'pants1-count',
+                            3
+                        )"
+                        alt="Pants image 3"
+                    >
+
+                    <img
+                        src="images/S__59162642_0.jpg"
+                        class="thumbnail"
+                        onclick="changeProductImage(
+                            'pants1-main-image',
+                            this,
+                            'pants1-count',
+                            4
+                        )"
+                        alt="Pants image 4"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <p class="product-type">
+                        PANTS
+                    </p>
+
+                    <h3>
+                        WHAT DOUBTS Pants 01
+                    </h3>
+
+                    <p class="price">
+                        ฿590
+                    </p>
+
+                    <label>
+                        ไซซ์
+                    </label>
+
+                    <select id="size-pants1">
+
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+
+                    </select>
+
+
+                    <button
+                        onclick="addToCart(
+                            'pants1',
+                            'WHAT DOUBTS Pants 01',
+                            590,
+                            650,
+                            'size-pants1'
+                        )"
+                    >
+                        เพิ่มลงตะกร้า
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ======================
+                 กางเกง 02
+            ======================= -->
+
+            <div
+                class="product"
+                data-category="pants"
+            >
+
+                <img
+                    src="images/606912289_1714618669843103_8313920674180058790_n.jpg"
+                    alt="Pants 02"
+                >
+
+
+                <div class="product-info">
+
+                    <p class="product-type">
+                        PANTS
+                    </p>
+
+                    <h3>
+                        WHAT DOUBTS Pants 02
+                    </h3>
+
+                    <p class="price">
+                        ฿650
+                    </p>
+
+                    <label>
+                        ไซซ์
+                    </label>
+
+                    <select id="size-pants2">
+
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+
+                    </select>
+
+
+                    <button
+                        onclick="addToCart(
+                            'pants2',
+                            'WHAT DOUBTS Pants 02',
+                            650,
+                            650,
+                            'size-pants2'
+                        )"
+                    >
+                        เพิ่มลงตะกร้า
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <h3>
+            WHAT DOUBTS
+        </h3>
+
+        <p>
+            © 2026 WHAT DOUBTS
+        </p>
+
+    </footer>
+
+
+
+    <!-- ==============================
+         CART
+    =============================== -->
+
+    <div
+        id="cart-modal"
+        class="modal"
+    >
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                onclick="closeCart()"
+            >
+                ×
+            </button>
+
+            <h2>
+                ตะกร้าสินค้า
+            </h2>
+
+
+            <div id="cart-items">
+            </div>
+
+
+            <div class="cart-total">
+
+                <span>
+                    ยอดรวมสินค้า
+                </span>
+
+                <strong>
+                    ฿<span id="cart-total">0</span>
+                </strong>
+
+            </div>
+
+
+            <button
+                class="checkout-button"
+                onclick="openCheckout()"
+            >
+                สั่งซื้อสินค้า
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         CHECKOUT
+    =============================== -->
+
+    <div
+        id="checkout-modal"
+        class="modal"
+    >
+
+        <div class="modal-box checkout-box">
+
+            <button
+                class="close"
+                onclick="closeCheckout()"
+            >
+                ×
+            </button>
+
+
+            <h2>
+                ข้อมูลจัดส่ง
+            </h2>
+
+
+            <form id="checkout-form">
+
+
+                <label>
+                    ชื่อ - นามสกุล
+                </label>
+
+                <input
+                    type="text"
+                    id="customer-name"
+                    required
+                >
+
+
+                <label>
+                    เบอร์โทรศัพท์
+                </label>
+
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    required
+                >
+
+
+                <label>
+                    ที่อยู่จัดส่ง
+                </label>
+
+                <textarea
+                    id="customer-address"
+                    rows="4"
+                    required
+                ></textarea>
+
+
+                <label>จังหวัด</label>
+
+                <input
+                    type="text"
+                    id="customer-province"
+                    placeholder="เช่น ปทุมธานี"
+                    autocomplete="address-level1"
+                    required
+                >
+
+                <p id="province-status" class="province-status"></p>
+
+
+                <label>
+                    รหัสไปรษณีย์
+                </label>
+
+                <input
+                    type="text"
+                    id="customer-postcode"
+                    maxlength="5"
+                    required
+                >
+
+
+
+                <!-- =========================
+                     ขนส่ง
+                ========================== -->
+
+                <!-- =========================
+                    การจัดส่ง
+                ========================= -->
+
+                <div class="shipping-card">
+
+                    <img
+                        src="images/41uapp.png"
+                        class="shipping-logo"
+                        alt="ไปรษณีย์ไทย"
+                    >
+
+                    <div class="shipping-info">
+                        <strong>ไปรษณีย์ไทย EMS</strong>
+                        <p>จัดส่งแบบ EMS ทุกออเดอร์</p>
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     PAYMENT
+                ========================== -->
+
+                <label>
+                    วิธีชำระเงิน
+                </label>
+
+                <select id="payment-method">
+
+                    <option value="transfer">
+                        โอนเงิน
+                    </option>
+
+                    <option value="cod">
+                        เก็บเงินปลายทาง
+                    </option>
+
+                </select>
+
+
+
+                <!-- =========================
+                     SUMMARY
+                ========================== -->
+
+                <div class="checkout-summary-box">
+
+                    <div class="summary-row">
+                        <span>ค่าสินค้า</span>
+
+                        <strong>
+                            ฿<span id="product-total">0</span>
+                        </strong>
+                    </div>
+
+
+                    <div class="summary-row">
+                        <span>ค่าจัดส่ง</span>
+
+                        <strong>
+                            ฿<span id="shipping-price">0</span>
+                        </strong>
+                    </div>
+
+
+                    <div class="summary-row grand-total">
+                        <span>ยอดชำระทั้งหมด</span>
+
+                        <strong>
+                            ฿<span id="checkout-total">0</span>
+                        </strong>
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="confirm-button"
+                >
+                    ยืนยันคำสั่งซื้อ
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         SUCCESS
+    =============================== -->
+
+    <div
+        id="success-modal"
+        class="modal"
+    >
+
+        <div class="success-box">
+
+            <div class="checkmark">
+                ✓
+            </div>
+
+            <h2>
+                สั่งซื้อสำเร็จ
+            </h2>
+
+            <p>
+                ขอบคุณที่สั่งซื้อสินค้ากับ WHAT DOUBTS
+            </p>
+
+            <button onclick="finishOrder()">
+                กลับหน้าร้าน
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
