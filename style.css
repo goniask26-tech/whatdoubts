@@ -1184,3 +1184,14 @@ footer {
 footer p {
     color: #ffffff !important;
 }
+
+/* บังคับสี Footer */
+body footer {
+    background-color: #FE4938 !important;
+    color: #ffffff !important;
+}
+
+body footer h3,
+body footer p {
+    color: #ffffff !important;
+}
