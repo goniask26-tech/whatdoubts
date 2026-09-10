@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-
 import {
     getFirestore,
     collection,
@@ -7,35 +6,20 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-
-// Firebase Config ของ WHATDOUBTS
 const firebaseConfig = {
-    apiKey: "ใส่ของคุณ",
+    apiKey: "AIzaSyBkovmV3neR0N1ITqbSbvzwqTb06WdnWF8",
     authDomain: "whatdoubts.firebaseapp.com",
     projectId: "whatdoubts",
-    storageBucket: "ใส่ของคุณ",
-    messagingSenderId: "ใส่ของคุณ",
-    appId: "ใส่ของคุณ"
+    storageBucket: "whatdoubts.firebasestorage.app",
+    messagingSenderId: "44143274298",
+    appId: "1:44143274298:web:8cde4fde974a916984c803",
+    measurementId: "G-Q69TZ5DWHK"
 };
 
-
-// เริ่ม Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
 let cart = [];
-
-
-// ==================================================
-// ตั้งค่าน้ำหนักสินค้า
-//
-// น้ำหนักถูกเก็บหลังบ้าน
-// ลูกค้าไม่เห็น
-//
-// เสื้อ = ประมาณ 300 กรัม
-// กางเกง = ประมาณ 650 กรัม
-// ==================================================
 
 
 // ==================================================
@@ -105,8 +89,6 @@ function showCategory(category, button) {
 
 // ==================================================
 // เพิ่มสินค้าเข้าตะกร้า
-//
-// weight = น้ำหนักสินค้าเป็นกรัม
 // ==================================================
 
 function addToCart(
@@ -186,8 +168,6 @@ function calculateProductTotal() {
 
 // ==================================================
 // คำนวณน้ำหนักรวม
-//
-// ลูกค้าไม่เห็น
 // ==================================================
 
 function calculateTotalWeight() {
@@ -201,9 +181,6 @@ function calculateTotalWeight() {
 
     });
 
-
-    // เผื่อน้ำหนักซอง / กล่อง / เทป
-    // 100 กรัมต่อออเดอร์
 
     if (cart.length > 0) {
 
@@ -224,44 +201,29 @@ function calculateTotalWeight() {
 function normalizeProvince(text) {
 
     return text
-
         .trim()
-
         .toLowerCase()
-
         .replace(/\s+/g, "")
-
         .replace("จังหวัด", "")
-
         .replace("จ.", "")
-
         .replace("ฯ", "");
 }
 
 
 
 // ==================================================
-// จังหวัดที่อยู่ใกล้ร้าน
-//
-// ตอนนี้ตั้งตัวอย่างต้นทางบริเวณปทุมธานี
+// จังหวัดใกล้
 // ==================================================
 
 const nearProvinces = [
 
     "ปทุมธานี",
-
     "กรุงเทพ",
-
     "กรุงเทพมหานคร",
-
     "นนทบุรี",
-
     "นครนายก",
-
     "พระนครศรีอยุธยา",
-
     "อยุธยา",
-
     "สมุทรปราการ"
 
 ];
@@ -275,31 +237,18 @@ const nearProvinces = [
 const middleProvinces = [
 
     "นครปฐม",
-
     "สมุทรสาคร",
-
     "สมุทรสงคราม",
-
     "สระบุรี",
-
     "ลพบุรี",
-
     "สุพรรณบุรี",
-
     "อ่างทอง",
-
     "สิงห์บุรี",
-
     "ชัยนาท",
-
     "ฉะเชิงเทรา",
-
     "ชลบุรี",
-
     "ปราจีนบุรี",
-
     "สระแก้ว",
-
     "ระยอง"
 
 ];
@@ -307,7 +256,7 @@ const middleProvinces = [
 
 
 // ==================================================
-// จังหวัดระยะไกล
+// จังหวัดไกล
 // ==================================================
 
 const farProvinces = [
@@ -367,9 +316,7 @@ const farProvinces = [
 
 
 // ==================================================
-// ตรวจว่าจังหวัดอยู่โซนไหน
-//
-// ค่านี้ไม่แสดงให้ลูกค้าเห็น
+// ตรวจโซนจังหวัด
 // ==================================================
 
 function getProvinceZone() {
@@ -400,21 +347,15 @@ function getProvinceZone() {
     }
 
 
-    // ----------------------------
-    // ตรวจจังหวัดใกล้
-    // ----------------------------
-
     const isNear =
-        nearProvinces.some(
-            function(item) {
+        nearProvinces.some(function(item) {
 
-                return (
-                    normalizeProvince(item) ===
-                    province
-                );
+            return (
+                normalizeProvince(item) ===
+                province
+            );
 
-            }
-        );
+        });
 
 
     if (isNear) {
@@ -424,21 +365,15 @@ function getProvinceZone() {
     }
 
 
-    // ----------------------------
-    // ตรวจจังหวัดระยะกลาง
-    // ----------------------------
-
     const isMiddle =
-        middleProvinces.some(
-            function(item) {
+        middleProvinces.some(function(item) {
 
-                return (
-                    normalizeProvince(item) ===
-                    province
-                );
+            return (
+                normalizeProvince(item) ===
+                province
+            );
 
-            }
-        );
+        });
 
 
     if (isMiddle) {
@@ -448,21 +383,15 @@ function getProvinceZone() {
     }
 
 
-    // ----------------------------
-    // ตรวจจังหวัดไกล
-    // ----------------------------
-
     const isFar =
-        farProvinces.some(
-            function(item) {
+        farProvinces.some(function(item) {
 
-                return (
-                    normalizeProvince(item) ===
-                    province
-                );
+            return (
+                normalizeProvince(item) ===
+                province
+            );
 
-            }
-        );
+        });
 
 
     if (isFar) {
@@ -472,17 +401,13 @@ function getProvinceZone() {
     }
 
 
-    // ถ้าระบบไม่รู้จักชื่อ
     return "unknown";
 }
 
 
 
 // ==================================================
-// ค่าส่งพื้นฐานจากน้ำหนัก
-//
-// เป็นเรทของร้านสำหรับระบบเว็บ
-// ไม่ใช่การดึงราคา EMS จริง
+// ค่าส่งตามน้ำหนัก
 // ==================================================
 
 function calculateWeightPrice() {
@@ -498,16 +423,12 @@ function calculateWeightPrice() {
     }
 
 
-    // ไม่เกิน 500 กรัม
-
     if (weight <= 500) {
 
         return 35;
 
     }
 
-
-    // 501 - 1,000 กรัม
 
     else if (weight <= 1000) {
 
@@ -516,16 +437,12 @@ function calculateWeightPrice() {
     }
 
 
-    // 1,001 - 2,000 กรัม
-
     else if (weight <= 2000) {
 
         return 65;
 
     }
 
-
-    // 2,001 - 3,000 กรัม
 
     else if (weight <= 3000) {
 
@@ -534,16 +451,12 @@ function calculateWeightPrice() {
     }
 
 
-    // 3,001 - 5,000 กรัม
-
     else if (weight <= 5000) {
 
         return 110;
 
     }
 
-
-    // มากกว่า 5 กิโล
 
     else {
 
@@ -556,8 +469,6 @@ function calculateWeightPrice() {
 
 // ==================================================
 // ค่าเพิ่มตามจังหวัด
-//
-// ลูกค้าไม่เห็นว่าเพิ่มเท่าไร
 // ==================================================
 
 function calculateProvincePrice() {
@@ -594,7 +505,6 @@ function calculateProvincePrice() {
     }
 
 
-    // ถ้าพิมพ์จังหวัดที่ระบบไม่รู้จัก
     return 0;
 }
 
@@ -602,10 +512,6 @@ function calculateProvincePrice() {
 
 // ==================================================
 // ค่าจัดส่งสุดท้าย
-//
-// น้ำหนัก + จังหวัด
-//
-// ลูกค้าจะเห็นเฉพาะผลรวมตัวนี้
 // ==================================================
 
 function calculateShipping() {
@@ -621,16 +527,12 @@ function calculateShipping() {
         getProvinceZone();
 
 
-    // ยังไม่ได้กรอกจังหวัด
-
     if (zone === null) {
 
         return 0;
 
     }
 
-
-    // ชื่อจังหวัดไม่ถูกต้อง
 
     if (zone === "unknown") {
 
@@ -804,9 +706,6 @@ function updateCheckoutTotal() {
 
     if (shippingElement) {
 
-        // ถ้ายังไม่ได้กรอกจังหวัด
-        // แสดง - แทน 0 บาท
-
         if (
             cart.length > 0 &&
             getProvinceZone() === null
@@ -912,7 +811,7 @@ function updateProvinceStatus() {
 
 
 // ==================================================
-// อ่านจังหวัดทันทีที่ลูกค้าพิมพ์
+// อ่านจังหวัดตอนลูกค้าพิมพ์
 // ==================================================
 
 const provinceInput =
@@ -987,7 +886,6 @@ function openCheckout() {
 
     closeCart();
 
-
     updateCheckoutTotal();
 
 
@@ -1016,177 +914,65 @@ function closeCheckout() {
 
 
 // ==================================================
-// ยืนยันคำสั่งซื้อ
+// ยืนยันคำสั่งซื้อ + บันทึกเข้า Firebase
 // ==================================================
 
-    document
-        .getElementById("checkout-form")
-        .addEventListener(
-            "submit",
-            async function(event) {
-    
-                event.preventDefault();
-    
-    
-                const name =
-                    document
-                        .getElementById("customer-name")
-                        .value.trim();
-    
-    
-                const phone =
-                    document
-                        .getElementById("customer-phone")
-                        .value.trim();
-    
-    
-                const address =
-                    document
-                        .getElementById("customer-address")
-                        .value.trim();
-    
-    
-                const province =
-                    document
-                        .getElementById("customer-province")
-                        .value.trim();
-    
-    
-                const postcode =
-                    document
-                        .getElementById("customer-postcode")
-                        .value.trim();
-    
-    
-                if (
-                    !name ||
-                    !phone ||
-                    !address ||
-                    !province ||
-                    !postcode
-                ) {
-    
-                    alert("กรุณากรอกข้อมูลให้ครบ");
-    
-                    return;
-                }
-    
-    
-                if (!/^\d{5}$/.test(postcode)) {
-    
-                    alert("กรุณากรอกรหัสไปรษณีย์ 5 หลัก");
-    
-                    return;
-                }
-    
-    
-                if (
-                    getProvinceZone() === "unknown"
-                ) {
-    
-                    alert("ไม่พบจังหวัด กรุณาตรวจสอบชื่อจังหวัด");
-    
-                    return;
-                }
-    
-    
-                const productTotal =
-                    calculateProductTotal();
-    
-    
-                const shippingPrice =
-                    calculateShipping();
-    
-    
-                const grandTotal =
-                    productTotal +
-                    shippingPrice;
-    
-    
-                const orderData = {
-    
-                    customerName: name,
-    
-                    phone: phone,
-    
-                    address: address,
-    
-                    province: province,
-    
-                    postcode: postcode,
-    
-                    items: cart.map(function(item) {
-    
-                        return {
-                            id: item.id,
-                            name: item.name,
-                            size: item.size,
-                            price: item.price
-                        };
-    
-                    }),
-    
-                    productTotal: productTotal,
-    
-                    shippingPrice: shippingPrice,
-    
-                    grandTotal: grandTotal,
-    
-                    shippingMethod:
-                        "Thailand Post EMS",
-    
-                    status:
-                        "pending",
-    
-                    createdAt:
-                        serverTimestamp()
-    
-                };
-    
-    
-                try {
-    
-                    const docRef =
-                        await addDoc(
-                            collection(db, "orders"),
-                            orderData
-                        );
-    
-    
-                    console.log(
-                        "Order saved:",
-                        docRef.id
-                    );
-    
-    
-                    closeCheckout();
-    
-    
-                    document
-                        .getElementById("success-modal")
-                        .classList.add("show");
-    
-                }
-    
-                catch (error) {
-    
-                    console.error(error);
-    
-                    alert(
-                        "เกิดข้อผิดพลาดในการส่งคำสั่งซื้อ กรุณาลองใหม่"
-                    );
-    
-                }
-    
-            }
-        );
+document
+    .getElementById("checkout-form")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
 
 
-            // ตรวจรหัสไปรษณีย์
+            const name =
+                document.getElementById(
+                    "customer-name"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "customer-phone"
+                ).value.trim();
+
+
+            const address =
+                document.getElementById(
+                    "customer-address"
+                ).value.trim();
+
+
+            const province =
+                document.getElementById(
+                    "customer-province"
+                ).value.trim();
+
+
+            const postcode =
+                document.getElementById(
+                    "customer-postcode"
+                ).value.trim();
+
 
             if (
-                !/^\d{5}$/.test(postcode)
+                !name ||
+                !phone ||
+                !address ||
+                !province ||
+                !postcode
             ) {
+
+                alert(
+                    "กรุณากรอกข้อมูลให้ครบ"
+                );
+
+                return;
+            }
+
+
+            if (!/^\d{5}$/.test(postcode)) {
 
                 alert(
                     "กรุณากรอกรหัสไปรษณีย์ 5 หลัก"
@@ -1195,8 +981,6 @@ function closeCheckout() {
                 return;
             }
 
-
-            // ตรวจชื่อจังหวัด
 
             if (
                 getProvinceZone() ===
@@ -1211,30 +995,141 @@ function closeCheckout() {
             }
 
 
-            const shipping =
+            const productTotal =
+                calculateProductTotal();
+
+
+            const shippingPrice =
                 calculateShipping();
 
 
-            const total =
-                calculateProductTotal() +
-                shipping;
+            const grandTotal =
+                productTotal +
+                shippingPrice;
 
 
-            // ตอนนี้ข้อมูลยังไม่ได้บันทึก
-            // ลงฐานข้อมูล
-            //
-            // เราสามารถต่อ Firebase
-            // ในขั้นตอนถัดไปได้
+            const orderData = {
+
+                customerName: name,
+
+                phone: phone,
+
+                address: address,
+
+                province: province,
+
+                postcode: postcode,
+
+                items: cart.map(function(item) {
+
+                    return {
+
+                        id: item.id,
+
+                        name: item.name,
+
+                        size: item.size,
+
+                        price: item.price
+
+                    };
+
+                }),
+
+                productTotal:
+                    productTotal,
+
+                shippingPrice:
+                    shippingPrice,
+
+                grandTotal:
+                    grandTotal,
+
+                shippingMethod:
+                    "Thailand Post EMS",
+
+                status:
+                    "pending",
+
+                createdAt:
+                    serverTimestamp()
+
+            };
 
 
-            closeCheckout();
+            const submitButton =
+                document.querySelector(
+                    '#checkout-form button[type="submit"]'
+                );
 
 
-            document
-                .getElementById(
-                    "success-modal"
-                )
-                .classList.add("show");
+            try {
+
+                if (submitButton) {
+
+                    submitButton.disabled = true;
+
+                    submitButton.textContent =
+                        "กำลังส่งคำสั่งซื้อ...";
+
+                }
+
+
+                const docRef =
+                    await addDoc(
+                        collection(
+                            db,
+                            "orders"
+                        ),
+                        orderData
+                    );
+
+
+                console.log(
+                    "Order saved:",
+                    docRef.id
+                );
+
+
+                closeCheckout();
+
+
+                document
+                    .getElementById(
+                        "success-modal"
+                    )
+                    .classList.add(
+                        "show"
+                    );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Firebase order error:",
+                    error
+                );
+
+
+                alert(
+                    "ส่งคำสั่งซื้อไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+                );
+
+            }
+
+            finally {
+
+                if (submitButton) {
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "ยืนยันคำสั่งซื้อ";
+
+                }
+
+            }
 
         }
     );
@@ -1339,17 +1234,23 @@ function changeProductImage(
 
 
     document
-        .getElementById(countId)
+        .getElementById(
+            countId
+        )
         .textContent =
         number + " / 4";
 }
 
-// =====================================
+
+
+// ==================================================
 // BANNER AUTO SLIDESHOW
-// =====================================
+// ==================================================
 
 const bannerBackgrounds =
-    document.querySelectorAll(".banner-bg");
+    document.querySelectorAll(
+        ".banner-bg"
+    );
 
 
 let currentBannerIndex = 0;
@@ -1357,23 +1258,22 @@ let currentBannerIndex = 0;
 
 function nextBanner() {
 
-    if (bannerBackgrounds.length <= 1) {
+    if (
+        bannerBackgrounds.length <= 1
+    ) {
+
         return;
     }
 
 
-    // ซ่อนรูปปัจจุบัน
     bannerBackgrounds[
         currentBannerIndex
     ].classList.remove("active");
 
 
-    // ไปรูปต่อไป
     currentBannerIndex++;
 
 
-    // ถ้าถึงรูปสุดท้าย
-    // ให้กลับไปเริ่มรูปแรก
     if (
         currentBannerIndex >=
         bannerBackgrounds.length
@@ -1384,7 +1284,6 @@ function nextBanner() {
     }
 
 
-    // แสดงรูปใหม่
     bannerBackgrounds[
         currentBannerIndex
     ].classList.add("active");
@@ -1392,34 +1291,53 @@ function nextBanner() {
 }
 
 
-// เปลี่ยนรูปทุก 5 วินาที
-
 setInterval(
     nextBanner,
     5000
 );
 
+
+
 // ==================================================
-// เริ่มระบบ
+// เปิดฟังก์ชันให้ HTML เรียกใช้ได้
 // ==================================================
 
-updateCart();
-updateProvinceStatus();
+window.showCategory =
+    showCategory;
 
-window.showCategory = showCategory;
-window.addToCart = addToCart;
-window.removeItem = removeItem;
+window.addToCart =
+    addToCart;
 
-window.openCart = openCart;
-window.closeCart = closeCart;
+window.removeItem =
+    removeItem;
 
-window.openCheckout = openCheckout;
-window.closeCheckout = closeCheckout;
+window.openCart =
+    openCart;
 
-window.finishOrder = finishOrder;
+window.closeCart =
+    closeCart;
+
+window.openCheckout =
+    openCheckout;
+
+window.closeCheckout =
+    closeCheckout;
+
+window.finishOrder =
+    finishOrder;
 
 window.changeProductImage =
     changeProductImage;
 
 window.updateCheckoutTotal =
     updateCheckoutTotal;
+
+
+
+// ==================================================
+// เริ่มระบบ
+// ==================================================
+
+updateCart();
+
+updateProvinceStatus();
