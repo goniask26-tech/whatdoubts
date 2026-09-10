@@ -1019,59 +1019,167 @@ function closeCheckout() {
 // ยืนยันคำสั่งซื้อ
 // ==================================================
 
-document
-    .getElementById("checkout-form")
-    .addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById(
-                    "customer-name"
-                ).value.trim();
-
-
-            const phone =
-                document.getElementById(
-                    "customer-phone"
-                ).value.trim();
-
-
-            const address =
-                document.getElementById(
-                    "customer-address"
-                ).value.trim();
-
-
-            const province =
-                document.getElementById(
-                    "customer-province"
-                ).value.trim();
-
-
-            const postcode =
-                document.getElementById(
-                    "customer-postcode"
-                ).value.trim();
-
-
-            if (
-                !name ||
-                !phone ||
-                !address ||
-                !province ||
-                !postcode
-            ) {
-
-                alert(
-                    "กรุณากรอกข้อมูลให้ครบ"
-                );
-
-                return;
+    document
+        .getElementById("checkout-form")
+        .addEventListener(
+            "submit",
+            async function(event) {
+    
+                event.preventDefault();
+    
+    
+                const name =
+                    document
+                        .getElementById("customer-name")
+                        .value.trim();
+    
+    
+                const phone =
+                    document
+                        .getElementById("customer-phone")
+                        .value.trim();
+    
+    
+                const address =
+                    document
+                        .getElementById("customer-address")
+                        .value.trim();
+    
+    
+                const province =
+                    document
+                        .getElementById("customer-province")
+                        .value.trim();
+    
+    
+                const postcode =
+                    document
+                        .getElementById("customer-postcode")
+                        .value.trim();
+    
+    
+                if (
+                    !name ||
+                    !phone ||
+                    !address ||
+                    !province ||
+                    !postcode
+                ) {
+    
+                    alert("กรุณากรอกข้อมูลให้ครบ");
+    
+                    return;
+                }
+    
+    
+                if (!/^\d{5}$/.test(postcode)) {
+    
+                    alert("กรุณากรอกรหัสไปรษณีย์ 5 หลัก");
+    
+                    return;
+                }
+    
+    
+                if (
+                    getProvinceZone() === "unknown"
+                ) {
+    
+                    alert("ไม่พบจังหวัด กรุณาตรวจสอบชื่อจังหวัด");
+    
+                    return;
+                }
+    
+    
+                const productTotal =
+                    calculateProductTotal();
+    
+    
+                const shippingPrice =
+                    calculateShipping();
+    
+    
+                const grandTotal =
+                    productTotal +
+                    shippingPrice;
+    
+    
+                const orderData = {
+    
+                    customerName: name,
+    
+                    phone: phone,
+    
+                    address: address,
+    
+                    province: province,
+    
+                    postcode: postcode,
+    
+                    items: cart.map(function(item) {
+    
+                        return {
+                            id: item.id,
+                            name: item.name,
+                            size: item.size,
+                            price: item.price
+                        };
+    
+                    }),
+    
+                    productTotal: productTotal,
+    
+                    shippingPrice: shippingPrice,
+    
+                    grandTotal: grandTotal,
+    
+                    shippingMethod:
+                        "Thailand Post EMS",
+    
+                    status:
+                        "pending",
+    
+                    createdAt:
+                        serverTimestamp()
+    
+                };
+    
+    
+                try {
+    
+                    const docRef =
+                        await addDoc(
+                            collection(db, "orders"),
+                            orderData
+                        );
+    
+    
+                    console.log(
+                        "Order saved:",
+                        docRef.id
+                    );
+    
+    
+                    closeCheckout();
+    
+    
+                    document
+                        .getElementById("success-modal")
+                        .classList.add("show");
+    
+                }
+    
+                catch (error) {
+    
+                    console.error(error);
+    
+                    alert(
+                        "เกิดข้อผิดพลาดในการส่งคำสั่งซื้อ กรุณาลองใหม่"
+                    );
+    
+                }
+    
             }
+        );
 
 
             // ตรวจรหัสไปรษณีย์
@@ -1297,3 +1405,21 @@ setInterval(
 
 updateCart();
 updateProvinceStatus();
+
+window.showCategory = showCategory;
+window.addToCart = addToCart;
+window.removeItem = removeItem;
+
+window.openCart = openCart;
+window.closeCart = closeCart;
+
+window.openCheckout = openCheckout;
+window.closeCheckout = closeCheckout;
+
+window.finishOrder = finishOrder;
+
+window.changeProductImage =
+    changeProductImage;
+
+window.updateCheckoutTotal =
+    updateCheckoutTotal;
