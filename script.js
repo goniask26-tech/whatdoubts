@@ -1394,11 +1394,25 @@ window.changeProductImage =
 window.updateCheckoutTotal =
     updateCheckoutTotal;
 
+// ==================================================
+// ให้ปุ่ม onclick ใน HTML เรียกฟังก์ชันได้
+// ==================================================
 
+window.showCategory = showCategory;
+window.addToCart = addToCart;
+window.removeItem = removeItem;
+window.openCart = openCart;
+window.closeCart = closeCart;
+window.openCheckout = openCheckout;
+window.closeCheckout = closeCheckout;
+window.finishOrder = finishOrder;
+window.changeProductImage = changeProductImage;
+window.updateCheckoutTotal = updateCheckoutTotal;
 
 // ==================================================
 // เริ่มระบบ
 // ==================================================
+
 
 updateCart();
 
