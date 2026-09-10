@@ -1,11 +1,17 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
 import {
     getFirestore,
     collection,
-    Doc,
+    doc,
     runTransaction,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+// ==================================================
+// FIREBASE
+// ==================================================
 
 const firebaseConfig = {
     apiKey: "AIzaSyBkovmV3neR0N1ITqbSbvzwqTb06WdnWF8",
@@ -18,7 +24,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
+
+// ==================================================
+// ตะกร้า
+// ==================================================
 
 let cart = [];
 
@@ -40,28 +52,41 @@ function showCategory(category, button) {
 
 
     buttons.forEach(function(btn) {
+
         btn.classList.remove("active");
+
     });
 
 
-    button.classList.add("active");
+    if (button) {
 
-
-    if (category === "all") {
-
-        title.textContent = "สินค้าทั้งหมด";
+        button.classList.add("active");
 
     }
 
-    else if (category === "shirt") {
 
-        title.textContent = "เสื้อ";
+    if (title) {
 
-    }
+        if (category === "all") {
 
-    else if (category === "pants") {
+            title.textContent =
+                "สินค้าทั้งหมด";
 
-        title.textContent = "กางเกง";
+        }
+
+        else if (category === "shirt") {
+
+            title.textContent =
+                "เสื้อ";
+
+        }
+
+        else if (category === "pants") {
+
+            title.textContent =
+                "กางเกง";
+
+        }
 
     }
 
@@ -73,23 +98,35 @@ function showCategory(category, button) {
             product.dataset.category === category
         ) {
 
-            product.style.display = "block";
+            product.style.display =
+                "block";
 
         }
 
         else {
 
-            product.style.display = "none";
+            product.style.display =
+                "none";
 
         }
 
     });
-}
 
+}
 
 
 // ==================================================
 // เพิ่มสินค้าเข้าตะกร้า
+//
+// ตัวอย่างกางเกง:
+//
+// addToCart(
+//   'pants1',
+//   'WHATDOUBTS Pants 01',
+//   590,
+//   650,
+//   'size-pants1'
+// )
 // ==================================================
 
 function addToCart(
@@ -100,8 +137,30 @@ function addToCart(
     sizeId
 ) {
 
+    const sizeElement =
+        document.getElementById(
+            sizeId
+        );
+
+
+    if (!sizeElement) {
+
+        console.error(
+            "ไม่พบช่องไซซ์:",
+            sizeId
+        );
+
+        alert(
+            "เกิดข้อผิดพลาดในการเลือกไซซ์"
+        );
+
+        return;
+
+    }
+
+
     const size =
-        document.getElementById(sizeId).value;
+        sizeElement.value;
 
 
     cart.push({
@@ -110,9 +169,9 @@ function addToCart(
 
         name: name,
 
-        price: price,
+        price: Number(price),
 
-        weight: weight,
+        weight: Number(weight),
 
         size: size
 
@@ -129,25 +188,29 @@ function addToCart(
         size +
         " ลงตะกร้าแล้ว"
     );
+
 }
 
 
-
 // ==================================================
-// ลบสินค้า
+// ลบสินค้าออกจากตะกร้า
 // ==================================================
 
 function removeItem(index) {
 
-    cart.splice(index, 1);
+    cart.splice(
+        index,
+        1
+    );
+
 
     updateCart();
+
 }
 
 
-
 // ==================================================
-// คำนวณราคาสินค้า
+// ราคารวมสินค้า
 // ==================================================
 
 function calculateProductTotal() {
@@ -157,18 +220,21 @@ function calculateProductTotal() {
 
     cart.forEach(function(item) {
 
-        total += item.price;
+        total +=
+            Number(item.price);
 
     });
 
 
     return total;
+
 }
 
 
-
 // ==================================================
-// คำนวณน้ำหนักรวม
+// น้ำหนักรวม
+//
+// +100 กรัมสำหรับแพ็กของ
 // ==================================================
 
 function calculateTotalWeight() {
@@ -178,7 +244,8 @@ function calculateTotalWeight() {
 
     cart.forEach(function(item) {
 
-        weight += item.weight;
+        weight +=
+            Number(item.weight);
 
     });
 
@@ -191,8 +258,8 @@ function calculateTotalWeight() {
 
 
     return weight;
-}
 
+}
 
 
 // ==================================================
@@ -201,15 +268,15 @@ function calculateTotalWeight() {
 
 function normalizeProvince(text) {
 
-    return text
+    return String(text)
         .trim()
         .toLowerCase()
         .replace(/\s+/g, "")
         .replace("จังหวัด", "")
         .replace("จ.", "")
         .replace("ฯ", "");
-}
 
+}
 
 
 // ==================================================
@@ -219,16 +286,22 @@ function normalizeProvince(text) {
 const nearProvinces = [
 
     "ปทุมธานี",
+
     "กรุงเทพ",
+
     "กรุงเทพมหานคร",
+
     "นนทบุรี",
+
     "นครนายก",
+
     "พระนครศรีอยุธยา",
+
     "อยุธยา",
+
     "สมุทรปราการ"
 
 ];
-
 
 
 // ==================================================
@@ -238,22 +311,42 @@ const nearProvinces = [
 const middleProvinces = [
 
     "นครปฐม",
+
     "สมุทรสาคร",
+
     "สมุทรสงคราม",
+
     "สระบุรี",
+
     "ลพบุรี",
+
     "สุพรรณบุรี",
+
     "อ่างทอง",
+
     "สิงห์บุรี",
+
     "ชัยนาท",
+
     "ฉะเชิงเทรา",
+
     "ชลบุรี",
+
     "ปราจีนบุรี",
+
     "สระแก้ว",
-    "ระยอง"
+
+    "ระยอง",
+
+    "ราชบุรี",
+
+    "กาญจนบุรี",
+
+    "เพชรบุรี",
+
+    "ประจวบคีรีขันธ์"
 
 ];
-
 
 
 // ==================================================
@@ -263,57 +356,104 @@ const middleProvinces = [
 const farProvinces = [
 
     "เชียงใหม่",
+
     "เชียงราย",
+
     "แม่ฮ่องสอน",
+
     "ลำพูน",
+
     "ลำปาง",
+
     "พะเยา",
+
     "แพร่",
+
     "น่าน",
 
     "อุตรดิตถ์",
+
     "พิษณุโลก",
+
     "สุโขทัย",
+
     "ตาก",
+
     "เพชรบูรณ์",
 
+    "กำแพงเพชร",
+
+    "นครสวรรค์",
+
+    "อุทัยธานี",
+
     "ขอนแก่น",
+
     "อุดรธานี",
+
     "หนองคาย",
+
+    "หนองบัวลำภู",
+
+    "บึงกาฬ",
+
     "เลย",
+
     "นครพนม",
+
     "สกลนคร",
+
     "มุกดาหาร",
+
     "กาฬสินธุ์",
+
     "มหาสารคาม",
+
     "ร้อยเอ็ด",
 
     "นครราชสีมา",
+
     "บุรีรัมย์",
+
     "สุรินทร์",
+
     "ศรีสะเกษ",
+
     "อุบลราชธานี",
+
     "ยโสธร",
+
     "อำนาจเจริญ",
 
     "ชุมพร",
+
     "สุราษฎร์ธานี",
+
     "นครศรีธรรมราช",
+
     "กระบี่",
+
     "พังงา",
+
     "ภูเก็ต",
+
     "ระนอง",
 
     "ตรัง",
+
     "พัทลุง",
+
     "สงขลา",
+
     "สตูล",
+
     "ปัตตานี",
+
     "ยะลา",
+
     "นราธิวาส"
 
 ];
-
 
 
 // ==================================================
@@ -349,14 +489,16 @@ function getProvinceZone() {
 
 
     const isNear =
-        nearProvinces.some(function(item) {
+        nearProvinces.some(
+            function(item) {
 
-            return (
-                normalizeProvince(item) ===
-                province
-            );
+                return (
+                    normalizeProvince(item) ===
+                    province
+                );
 
-        });
+            }
+        );
 
 
     if (isNear) {
@@ -367,14 +509,16 @@ function getProvinceZone() {
 
 
     const isMiddle =
-        middleProvinces.some(function(item) {
+        middleProvinces.some(
+            function(item) {
 
-            return (
-                normalizeProvince(item) ===
-                province
-            );
+                return (
+                    normalizeProvince(item) ===
+                    province
+                );
 
-        });
+            }
+        );
 
 
     if (isMiddle) {
@@ -385,14 +529,16 @@ function getProvinceZone() {
 
 
     const isFar =
-        farProvinces.some(function(item) {
+        farProvinces.some(
+            function(item) {
 
-            return (
-                normalizeProvince(item) ===
-                province
-            );
+                return (
+                    normalizeProvince(item) ===
+                    province
+                );
 
-        });
+            }
+        );
 
 
     if (isFar) {
@@ -403,12 +549,12 @@ function getProvinceZone() {
 
 
     return "unknown";
+
 }
 
 
-
 // ==================================================
-// ค่าส่งตามน้ำหนัก
+// ค่าส่งจากน้ำหนัก
 // ==================================================
 
 function calculateWeightPrice() {
@@ -431,41 +577,37 @@ function calculateWeightPrice() {
     }
 
 
-    else if (weight <= 1000) {
+    if (weight <= 1000) {
 
         return 45;
 
     }
 
 
-    else if (weight <= 2000) {
+    if (weight <= 2000) {
 
         return 65;
 
     }
 
 
-    else if (weight <= 3000) {
+    if (weight <= 3000) {
 
         return 85;
 
     }
 
 
-    else if (weight <= 5000) {
+    if (weight <= 5000) {
 
         return 110;
 
     }
 
 
-    else {
+    return 150;
 
-        return 150;
-
-    }
 }
-
 
 
 // ==================================================
@@ -507,12 +649,12 @@ function calculateProvincePrice() {
 
 
     return 0;
+
 }
 
 
-
 // ==================================================
-// ค่าจัดส่งสุดท้าย
+// ค่าส่งทั้งหมด
 // ==================================================
 
 function calculateShipping() {
@@ -528,34 +670,22 @@ function calculateShipping() {
         getProvinceZone();
 
 
-    if (zone === null) {
+    if (
+        zone === null ||
+        zone === "unknown"
+    ) {
 
         return 0;
 
     }
-
-
-    if (zone === "unknown") {
-
-        return 0;
-
-    }
-
-
-    const weightPrice =
-        calculateWeightPrice();
-
-
-    const provincePrice =
-        calculateProvincePrice();
 
 
     return (
-        weightPrice +
-        provincePrice
+        calculateWeightPrice() +
+        calculateProvincePrice()
     );
-}
 
+}
 
 
 // ==================================================
@@ -584,57 +714,56 @@ function updateCart() {
         );
 
 
-    if (!cartItems) {
+    if (cartItems) {
 
-        return;
+        cartItems.innerHTML = "";
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML =
+                "<p class='empty-cart'>ยังไม่มีสินค้าในตะกร้า</p>";
+
+        }
+
+
+        cart.forEach(
+            function(item, index) {
+
+                cartItems.innerHTML += `
+
+                    <div class="cart-item">
+
+                        <div class="cart-item-info">
+
+                            <strong>
+                                ${item.name}
+                            </strong>
+
+                            <p>
+                                ไซซ์ ${item.size}
+                                •
+                                ฿${item.price.toLocaleString()}
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="remove-button"
+                            onclick="removeItem(${index})"
+                        >
+                            ลบ
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        );
 
     }
-
-
-    cartItems.innerHTML = "";
-
-
-    if (cart.length === 0) {
-
-        cartItems.innerHTML =
-            "<p class='empty-cart'>ยังไม่มีสินค้าในตะกร้า</p>";
-
-    }
-
-
-    cart.forEach(function(item, index) {
-
-        cartItems.innerHTML += `
-
-            <div class="cart-item">
-
-                <div class="cart-item-info">
-
-                    <strong>
-                        ${item.name}
-                    </strong>
-
-                    <p>
-                        ไซซ์ ${item.size}
-                        •
-                        ฿${item.price.toLocaleString()}
-                    </p>
-
-                </div>
-
-
-                <button
-                    class="remove-button"
-                    onclick="removeItem(${index})"
-                >
-                    ลบ
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
 
     const total =
@@ -656,8 +785,8 @@ function updateCart() {
 
 
     updateCheckoutTotal();
-}
 
+}
 
 
 // ==================================================
@@ -709,18 +838,14 @@ function updateCheckoutTotal() {
 
         if (
             cart.length > 0 &&
-            getProvinceZone() === null
+            (
+                getProvinceZone() === null ||
+                getProvinceZone() === "unknown"
+            )
         ) {
 
-            shippingElement.textContent = "-";
-
-        }
-
-        else if (
-            getProvinceZone() === "unknown"
-        ) {
-
-            shippingElement.textContent = "-";
+            shippingElement.textContent =
+                "-";
 
         }
 
@@ -743,12 +868,12 @@ function updateCheckoutTotal() {
 
 
     updateProvinceStatus();
+
 }
 
 
-
 // ==================================================
-// ข้อความตรวจสอบจังหวัด
+// สถานะจังหวัด
 // ==================================================
 
 function updateProvinceStatus() {
@@ -759,7 +884,16 @@ function updateProvinceStatus() {
         );
 
 
-    if (!status) {
+    const provinceElement =
+        document.getElementById(
+            "customer-province"
+        );
+
+
+    if (
+        !status ||
+        !provinceElement
+    ) {
 
         return;
 
@@ -767,9 +901,7 @@ function updateProvinceStatus() {
 
 
     const province =
-        document.getElementById(
-            "customer-province"
-        ).value.trim();
+        provinceElement.value.trim();
 
 
     if (province === "") {
@@ -781,6 +913,7 @@ function updateProvinceStatus() {
             "province-status";
 
         return;
+
     }
 
 
@@ -807,12 +940,12 @@ function updateProvinceStatus() {
             "province-status success";
 
     }
+
 }
 
 
-
 // ==================================================
-// อ่านจังหวัดตอนลูกค้าพิมพ์
+// พิมพ์จังหวัดแล้วคำนวณทันที
 // ==================================================
 
 const provinceInput =
@@ -835,7 +968,6 @@ if (provinceInput) {
 }
 
 
-
 // ==================================================
 // เปิดตะกร้า
 // ==================================================
@@ -845,13 +977,19 @@ function openCart() {
     updateCart();
 
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "cart-modal"
-        )
-        .classList.add("show");
-}
+        );
 
+
+    if (modal) {
+
+        modal.classList.add("show");
+
+    }
+
+}
 
 
 // ==================================================
@@ -860,13 +998,19 @@ function openCart() {
 
 function closeCart() {
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "cart-modal"
-        )
-        .classList.remove("show");
-}
+        );
 
+
+    if (modal) {
+
+        modal.classList.remove("show");
+
+    }
+
+}
 
 
 // ==================================================
@@ -882,6 +1026,7 @@ function openCheckout() {
         );
 
         return;
+
     }
 
 
@@ -890,13 +1035,19 @@ function openCheckout() {
     updateCheckoutTotal();
 
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "checkout-modal"
-        )
-        .classList.add("show");
-}
+        );
 
+
+    if (modal) {
+
+        modal.classList.add("show");
+
+    }
+
+}
 
 
 // ==================================================
@@ -905,51 +1056,86 @@ function openCheckout() {
 
 function closeCheckout() {
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "checkout-modal"
-        )
-        .classList.remove("show");
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove("show");
+
+    }
+
 }
 
 
-
 // ==================================================
-// ยืนยันคำสั่งซื้อ + ตัดสต๊อก + สร้างออเดอร์
+// ยืนยันออเดอร์
+//
+// 1. เช็ก stock
+// 2. ตัด stock
+// 3. สร้าง order
+//
+// ทำทั้งหมดใน Transaction เดียว
 // ==================================================
 
-document
-    .getElementById("checkout-form")
-    .addEventListener(
+const checkoutForm =
+    document.getElementById(
+        "checkout-form"
+    );
+
+
+if (checkoutForm) {
+
+    checkoutForm.addEventListener(
         "submit",
         async function(event) {
 
             event.preventDefault();
+
+
+            if (cart.length === 0) {
+
+                alert(
+                    "ไม่มีสินค้าในตะกร้า"
+                );
+
+                return;
+
+            }
+
 
             const name =
                 document.getElementById(
                     "customer-name"
                 ).value.trim();
 
+
             const phone =
                 document.getElementById(
                     "customer-phone"
                 ).value.trim();
+
 
             const address =
                 document.getElementById(
                     "customer-address"
                 ).value.trim();
 
+
             const province =
                 document.getElementById(
                     "customer-province"
                 ).value.trim();
 
+
             const postcode =
                 document.getElementById(
                     "customer-postcode"
                 ).value.trim();
+
 
             if (
                 !name ||
@@ -959,18 +1145,27 @@ document
                 !postcode
             ) {
 
-                alert("กรุณากรอกข้อมูลให้ครบ");
+                alert(
+                    "กรุณากรอกข้อมูลให้ครบ"
+                );
+
                 return;
+
             }
 
-            if (!/^\d{5}$/.test(postcode)) {
+
+            if (
+                !/^\d{5}$/.test(postcode)
+            ) {
 
                 alert(
                     "กรุณากรอกรหัสไปรษณีย์ 5 หลัก"
                 );
 
                 return;
+
             }
+
 
             if (
                 getProvinceZone() ===
@@ -982,130 +1177,312 @@ document
                 );
 
                 return;
+
             }
+
 
             const productTotal =
                 calculateProductTotal();
 
+
             const shippingPrice =
                 calculateShipping();
+
 
             const grandTotal =
                 productTotal +
                 shippingPrice;
 
+
             const submitButton =
-                document.querySelector(
-                    '#checkout-form button[type="submit"]'
+                checkoutForm.querySelector(
+                    'button[type="submit"]'
                 );
+
 
             try {
 
                 if (submitButton) {
-                    submitButton.disabled = true;
+
+                    submitButton.disabled =
+                        true;
+
                     submitButton.textContent =
                         "กำลังส่งคำสั่งซื้อ...";
+
                 }
+
 
                 await runTransaction(
                     db,
                     async function(transaction) {
 
+
+                        // ======================================
+                        // รวมจำนวนสินค้าตาม ID + SIZE
+                        // ======================================
+
                         const stockChanges = {};
 
-                        cart.forEach(function(item) {
 
-                            const key =
-                                item.id +
-                                "_" +
-                                item.size;
+                        cart.forEach(
+                            function(item) {
 
-                            if (!stockChanges[key]) {
-                                stockChanges[key] = {
-                                    id: item.id,
-                                    size: item.size,
-                                    quantity: 0
-                                };
+                                const key =
+                                    item.id +
+                                    "_" +
+                                    item.size;
+
+
+                                if (!stockChanges[key]) {
+
+                                    stockChanges[key] = {
+
+                                        productId:
+                                            item.id,
+
+                                        size:
+                                            item.size,
+
+                                        quantity:
+                                            0,
+
+                                        name:
+                                            item.name
+
+                                    };
+
+                                }
+
+
+                                stockChanges[key]
+                                    .quantity++;
+
                             }
+                        );
 
-                            stockChanges[key].quantity++;
-                        });
 
-                        const productSnapshots = {};
+                        // ======================================
+                        // รวมตามสินค้า เพื่ออ่าน Firestore
+                        // แค่ครั้งเดียวต่อสินค้า
+                        // ======================================
+
+                        const productGroups = {};
+
+
+                        Object.keys(
+                            stockChanges
+                        ).forEach(
+                            function(key) {
+
+                                const change =
+                                    stockChanges[key];
+
+
+                                if (
+                                    !productGroups[
+                                        change.productId
+                                    ]
+                                ) {
+
+                                    productGroups[
+                                        change.productId
+                                    ] = [];
+
+                                }
+
+
+                                productGroups[
+                                    change.productId
+                                ].push(
+                                    change
+                                );
+
+                            }
+                        );
+
+
+                        // ======================================
+                        // ต้อง READ ทุกสินค้าให้ครบก่อน WRITE
+                        // ======================================
+
+                        const snapshots = {};
+
 
                         for (
-                            const key in stockChanges
+                            const productId
+                            of Object.keys(
+                                productGroups
+                            )
                         ) {
-
-                            const change =
-                                stockChanges[key];
 
                             const productRef =
                                 doc(
                                     db,
                                     "products",
-                                    change.id
+                                    productId
                                 );
 
-                            const productSnap =
+
+                            const snapshot =
                                 await transaction.get(
                                     productRef
                                 );
 
-                            if (!productSnap.exists()) {
-
-                                throw new Error(
-                                    "ไม่พบสินค้า " +
-                                    change.id
-                                );
-                            }
-
-                            productSnapshots[key] = {
-                                ref: productRef,
-                                data: productSnap.data(),
-                                change: change
-                            };
-                        }
-
-                        for (
-                            const key in productSnapshots
-                        ) {
-
-                            const item =
-                                productSnapshots[key];
-
-                            const stockField =
-                                "stock" +
-                                item.change.size;
-
-                            const currentStock =
-                                Number(
-                                    item.data[
-                                        stockField
-                                    ]
-                                );
 
                             if (
-                                currentStock <
-                                item.change.quantity
+                                !snapshot.exists()
                             ) {
 
                                 throw new Error(
-                                    "สินค้าไซซ์ " +
-                                    item.change.size +
-                                    " เหลือไม่พอ"
+                                    "ไม่พบสินค้า " +
+                                    productId +
+                                    " ในระบบสต๊อก"
                                 );
+
                             }
 
-                            transaction.update(
-                                item.ref,
-                                {
-                                    [stockField]:
+
+                            snapshots[
+                                productId
+                            ] = {
+
+                                ref:
+                                    productRef,
+
+                                data:
+                                    snapshot.data()
+
+                            };
+
+                        }
+
+
+                        // ======================================
+                        // ตรวจสต๊อก + เตรียมจำนวนใหม่
+                        // ======================================
+
+                        const updates = {};
+
+
+                        for (
+                            const productId
+                            of Object.keys(
+                                productGroups
+                            )
+                        ) {
+
+                            const productInfo =
+                                snapshots[
+                                    productId
+                                ];
+
+
+                            const updateData = {};
+
+
+                            productGroups[
+                                productId
+                            ].forEach(
+                                function(change) {
+
+                                    const size =
+                                        String(
+                                            change.size
+                                        ).toUpperCase();
+
+
+                                    const stockField =
+                                        "stock" +
+                                        size;
+
+
+                                    const currentStock =
+                                        Number(
+                                            productInfo
+                                                .data[
+                                                    stockField
+                                                ]
+                                        );
+
+
+                                    if (
+                                        Number.isNaN(
+                                            currentStock
+                                        )
+                                    ) {
+
+                                        throw new Error(
+                                            "ไม่พบสต๊อกไซซ์ " +
+                                            size +
+                                            " ของ " +
+                                            change.name
+                                        );
+
+                                    }
+
+
+                                    if (
+                                        currentStock <
+                                        change.quantity
+                                    ) {
+
+                                        throw new Error(
+                                            change.name +
+                                            " ไซซ์ " +
+                                            size +
+                                            " เหลือไม่พอ"
+                                        );
+
+                                    }
+
+
+                                    updateData[
+                                        stockField
+                                    ] =
                                         currentStock -
-                                        item.change.quantity
+                                        change.quantity;
+
                                 }
                             );
+
+
+                            updates[
+                                productId
+                            ] = updateData;
+
                         }
+
+
+                        // ======================================
+                        // ตัดสต๊อก
+                        // ======================================
+
+                        for (
+                            const productId
+                            of Object.keys(
+                                updates
+                            )
+                        ) {
+
+                            transaction.update(
+
+                                snapshots[
+                                    productId
+                                ].ref,
+
+                                updates[
+                                    productId
+                                ]
+
+                            );
+
+                        }
+
+
+                        // ======================================
+                        // สร้าง Order
+                        // ======================================
 
                         const orderRef =
                             doc(
@@ -1115,26 +1492,50 @@ document
                                 )
                             );
 
+
                         transaction.set(
                             orderRef,
                             {
-                                customerName: name,
-                                phone: phone,
-                                address: address,
-                                province: province,
-                                postcode: postcode,
+
+                                customerName:
+                                    name,
+
+                                phone:
+                                    phone,
+
+                                address:
+                                    address,
+
+                                province:
+                                    province,
+
+                                postcode:
+                                    postcode,
+
 
                                 items:
                                     cart.map(
                                         function(item) {
+
                                             return {
-                                                id: item.id,
-                                                name: item.name,
-                                                size: item.size,
-                                                price: item.price
+
+                                                id:
+                                                    item.id,
+
+                                                name:
+                                                    item.name,
+
+                                                size:
+                                                    item.size,
+
+                                                price:
+                                                    item.price
+
                                             };
+
                                         }
                                     ),
+
 
                                 productTotal:
                                     productTotal,
@@ -1153,34 +1554,50 @@ document
 
                                 createdAt:
                                     serverTimestamp()
+
                             }
                         );
+
                     }
                 );
 
+
+                // ======================================
+                // สำเร็จ
+                // ======================================
+
                 closeCheckout();
 
-                document
-                    .getElementById(
+
+                const successModal =
+                    document.getElementById(
                         "success-modal"
-                    )
-                    .classList.add(
+                    );
+
+
+                if (successModal) {
+
+                    successModal.classList.add(
                         "show"
                     );
+
+                }
 
             }
 
             catch (error) {
 
                 console.error(
-                    "Order error:",
+                    "ORDER ERROR:",
                     error
                 );
 
+
                 alert(
                     error.message ||
-                    "ส่งคำสั่งซื้อไม่สำเร็จ"
+                    "ส่งคำสั่งซื้อไม่สำเร็จ กรุณาลองใหม่"
                 );
+
             }
 
             finally {
@@ -1192,10 +1609,15 @@ document
 
                     submitButton.textContent =
                         "ยืนยันคำสั่งซื้อ";
+
                 }
+
             }
+
         }
     );
+
+}
 
 
 // ==================================================
@@ -1210,18 +1632,26 @@ function finishOrder() {
     updateCart();
 
 
-    document
-        .getElementById(
-            "checkout-form"
-        )
-        .reset();
+    if (checkoutForm) {
+
+        checkoutForm.reset();
+
+    }
 
 
-    document
-        .getElementById(
+    const successModal =
+        document.getElementById(
             "success-modal"
-        )
-        .classList.remove("show");
+        );
+
+
+    if (successModal) {
+
+        successModal.classList.remove(
+            "show"
+        );
+
+    }
 
 
     updateProvinceStatus();
@@ -1234,8 +1664,8 @@ function finishOrder() {
         behavior: "smooth"
 
     });
-}
 
+}
 
 
 // ==================================================
@@ -1255,25 +1685,34 @@ function changeProductImage(
         );
 
 
+    if (!mainImage) {
+
+        return;
+
+    }
+
+
     mainImage.style.opacity =
         "0";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        mainImage.src =
-            thumbnail.src;
+            mainImage.src =
+                thumbnail.src;
 
 
-        mainImage.style.opacity =
-            "1";
+            mainImage.style.opacity =
+                "1";
 
-    }, 150);
+        },
+        150
+    );
 
 
     const thumbnails =
-        thumbnail
-            .parentElement
+        thumbnail.parentElement
             .querySelectorAll(
                 ".thumbnail"
             );
@@ -1295,18 +1734,24 @@ function changeProductImage(
     );
 
 
-    document
-        .getElementById(
+    const countElement =
+        document.getElementById(
             countId
-        )
-        .textContent =
-        number + " / 4";
+        );
+
+
+    if (countElement) {
+
+        countElement.textContent =
+            number + " / 4";
+
+    }
+
 }
 
 
-
 // ==================================================
-// BANNER AUTO SLIDESHOW
+// BANNER SLIDESHOW
 // ==================================================
 
 const bannerBackgrounds =
@@ -1325,12 +1770,15 @@ function nextBanner() {
     ) {
 
         return;
+
     }
 
 
     bannerBackgrounds[
         currentBannerIndex
-    ].classList.remove("active");
+    ].classList.remove(
+        "active"
+    );
 
 
     currentBannerIndex++;
@@ -1348,7 +1796,9 @@ function nextBanner() {
 
     bannerBackgrounds[
         currentBannerIndex
-    ].classList.add("active");
+    ].classList.add(
+        "active"
+    );
 
 }
 
@@ -1359,9 +1809,9 @@ setInterval(
 );
 
 
-
 // ==================================================
-// เปิดฟังก์ชันให้ HTML เรียกใช้ได้
+// สำคัญมาก
+// เปิดฟังก์ชันให้ onclick ใน index.html เรียกได้
 // ==================================================
 
 window.showCategory =
@@ -1394,25 +1844,10 @@ window.changeProductImage =
 window.updateCheckoutTotal =
     updateCheckoutTotal;
 
-// ==================================================
-// ให้ปุ่ม onclick ใน HTML เรียกฟังก์ชันได้
-// ==================================================
-
-window.showCategory = showCategory;
-window.addToCart = addToCart;
-window.removeItem = removeItem;
-window.openCart = openCart;
-window.closeCart = closeCart;
-window.openCheckout = openCheckout;
-window.closeCheckout = closeCheckout;
-window.finishOrder = finishOrder;
-window.changeProductImage = changeProductImage;
-window.updateCheckoutTotal = updateCheckoutTotal;
 
 // ==================================================
 // เริ่มระบบ
 // ==================================================
-
 
 updateCart();
 
