@@ -2,7 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import {
     getFirestore,
     collection,
-    addDoc,
+    Doc,
+    runTransaction,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
