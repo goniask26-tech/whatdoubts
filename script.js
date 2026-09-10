@@ -915,7 +915,7 @@ function closeCheckout() {
 
 
 // ==================================================
-// ยืนยันคำสั่งซื้อ + บันทึกเข้า Firebase
+// ยืนยันคำสั่งซื้อ + ตัดสต๊อก + สร้างออเดอร์
 // ==================================================
 
 document
@@ -926,36 +926,30 @@ document
 
             event.preventDefault();
 
-
             const name =
                 document.getElementById(
                     "customer-name"
                 ).value.trim();
-
 
             const phone =
                 document.getElementById(
                     "customer-phone"
                 ).value.trim();
 
-
             const address =
                 document.getElementById(
                     "customer-address"
                 ).value.trim();
-
 
             const province =
                 document.getElementById(
                     "customer-province"
                 ).value.trim();
 
-
             const postcode =
                 document.getElementById(
                     "customer-postcode"
                 ).value.trim();
-
 
             if (
                 !name ||
@@ -965,13 +959,9 @@ document
                 !postcode
             ) {
 
-                alert(
-                    "กรุณากรอกข้อมูลให้ครบ"
-                );
-
+                alert("กรุณากรอกข้อมูลให้ครบ");
                 return;
             }
-
 
             if (!/^\d{5}$/.test(postcode)) {
 
@@ -981,7 +971,6 @@ document
 
                 return;
             }
-
 
             if (
                 getProvinceZone() ===
@@ -995,105 +984,181 @@ document
                 return;
             }
 
-
             const productTotal =
                 calculateProductTotal();
-
 
             const shippingPrice =
                 calculateShipping();
 
-
             const grandTotal =
                 productTotal +
                 shippingPrice;
-
-
-            const orderData = {
-
-                customerName: name,
-
-                phone: phone,
-
-                address: address,
-
-                province: province,
-
-                postcode: postcode,
-
-                items: cart.map(function(item) {
-
-                    return {
-
-                        id: item.id,
-
-                        name: item.name,
-
-                        size: item.size,
-
-                        price: item.price
-
-                    };
-
-                }),
-
-                productTotal:
-                    productTotal,
-
-                shippingPrice:
-                    shippingPrice,
-
-                grandTotal:
-                    grandTotal,
-
-                shippingMethod:
-                    "Thailand Post EMS",
-
-                status:
-                    "pending",
-
-                createdAt:
-                    serverTimestamp()
-
-            };
-
 
             const submitButton =
                 document.querySelector(
                     '#checkout-form button[type="submit"]'
                 );
 
-
             try {
 
                 if (submitButton) {
-
                     submitButton.disabled = true;
-
                     submitButton.textContent =
                         "กำลังส่งคำสั่งซื้อ...";
-
                 }
 
+                await runTransaction(
+                    db,
+                    async function(transaction) {
 
-                const docRef =
-                    await addDoc(
-                        collection(
-                            db,
-                            "orders"
-                        ),
-                        orderData
-                    );
+                        const stockChanges = {};
 
+                        cart.forEach(function(item) {
 
-                console.log(
-                    "Order saved:",
-                    docRef.id
+                            const key =
+                                item.id +
+                                "_" +
+                                item.size;
+
+                            if (!stockChanges[key]) {
+                                stockChanges[key] = {
+                                    id: item.id,
+                                    size: item.size,
+                                    quantity: 0
+                                };
+                            }
+
+                            stockChanges[key].quantity++;
+                        });
+
+                        const productSnapshots = {};
+
+                        for (
+                            const key in stockChanges
+                        ) {
+
+                            const change =
+                                stockChanges[key];
+
+                            const productRef =
+                                doc(
+                                    db,
+                                    "products",
+                                    change.id
+                                );
+
+                            const productSnap =
+                                await transaction.get(
+                                    productRef
+                                );
+
+                            if (!productSnap.exists()) {
+
+                                throw new Error(
+                                    "ไม่พบสินค้า " +
+                                    change.id
+                                );
+                            }
+
+                            productSnapshots[key] = {
+                                ref: productRef,
+                                data: productSnap.data(),
+                                change: change
+                            };
+                        }
+
+                        for (
+                            const key in productSnapshots
+                        ) {
+
+                            const item =
+                                productSnapshots[key];
+
+                            const stockField =
+                                "stock" +
+                                item.change.size;
+
+                            const currentStock =
+                                Number(
+                                    item.data[
+                                        stockField
+                                    ]
+                                );
+
+                            if (
+                                currentStock <
+                                item.change.quantity
+                            ) {
+
+                                throw new Error(
+                                    "สินค้าไซซ์ " +
+                                    item.change.size +
+                                    " เหลือไม่พอ"
+                                );
+                            }
+
+                            transaction.update(
+                                item.ref,
+                                {
+                                    [stockField]:
+                                        currentStock -
+                                        item.change.quantity
+                                }
+                            );
+                        }
+
+                        const orderRef =
+                            doc(
+                                collection(
+                                    db,
+                                    "orders"
+                                )
+                            );
+
+                        transaction.set(
+                            orderRef,
+                            {
+                                customerName: name,
+                                phone: phone,
+                                address: address,
+                                province: province,
+                                postcode: postcode,
+
+                                items:
+                                    cart.map(
+                                        function(item) {
+                                            return {
+                                                id: item.id,
+                                                name: item.name,
+                                                size: item.size,
+                                                price: item.price
+                                            };
+                                        }
+                                    ),
+
+                                productTotal:
+                                    productTotal,
+
+                                shippingPrice:
+                                    shippingPrice,
+
+                                grandTotal:
+                                    grandTotal,
+
+                                shippingMethod:
+                                    "Thailand Post EMS",
+
+                                status:
+                                    "pending",
+
+                                createdAt:
+                                    serverTimestamp()
+                            }
+                        );
+                    }
                 );
 
-
                 closeCheckout();
-
 
                 document
                     .getElementById(
@@ -1108,33 +1173,29 @@ document
             catch (error) {
 
                 console.error(
-                    "Firebase order error:",
+                    "Order error:",
                     error
                 );
 
-
                 alert(
-                    "ส่งคำสั่งซื้อไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+                    error.message ||
+                    "ส่งคำสั่งซื้อไม่สำเร็จ"
                 );
-
             }
 
             finally {
 
                 if (submitButton) {
 
-                    submitButton.disabled = false;
+                    submitButton.disabled =
+                        false;
 
                     submitButton.textContent =
                         "ยืนยันคำสั่งซื้อ";
-
                 }
-
             }
-
         }
     );
-
 
 
 // ==================================================
