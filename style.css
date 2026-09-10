@@ -1175,3 +1175,12 @@ header {
     background: #FE4938 !important;
     border-bottom-color: #FE4938 !important;
 }
+
+footer {
+    background: #FE4938 !important;
+    color: #ffffff !important;
+}
+
+footer p {
+    color: #ffffff !important;
+}
