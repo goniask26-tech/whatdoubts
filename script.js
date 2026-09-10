@@ -1,3 +1,29 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+// Firebase Config ของ WHATDOUBTS
+const firebaseConfig = {
+    apiKey: "ใส่ของคุณ",
+    authDomain: "whatdoubts.firebaseapp.com",
+    projectId: "whatdoubts",
+    storageBucket: "ใส่ของคุณ",
+    messagingSenderId: "ใส่ของคุณ",
+    appId: "ใส่ของคุณ"
+};
+
+
+// เริ่ม Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
 let cart = [];
 
 
