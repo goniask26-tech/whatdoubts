@@ -1,3 +1,706 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: #FE4938;
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.cart-button {
+    border: 0;
+    background: #fff;
+
+    padding: 12px 20px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+}
+
+#cart-count {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 21px;
+    height: 21px;
+
+    margin-left: 7px;
+
+    border-radius: 50%;
+
+    background: #111;
+    color: #fff;
+}
+
+
+/* ===========================
+   CATEGORY
+=========================== */
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 25px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.category {
+    border: 0;
+    background: transparent;
+
+    padding: 12px 25px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+}
+
+.category.active {
+    background: #111;
+    color: #fff;
+}
+
+
+/* ===========================
+   BANNER
+=========================== */
+
+.banner {
+    position: relative;
+
+    min-height: 430px;
+
+    margin: 30px 5%;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.banner-backgrounds {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+}
+
+.banner-bg {
+    position: absolute;
+    inset: 0;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    transition: opacity 1.5s ease;
+}
+
+.banner-bg.active {
+    opacity: 1;
+}
+
+.banner-dark {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.banner-content {
+    position: relative;
+
+    z-index: 3;
+
+    color: #fff;
+}
+
+.banner-content h1 {
+    font-size: clamp(36px, 7vw, 80px);
+
+    font-weight: 900;
+
+    letter-spacing: 8px;
+}
+
+.banner-content p {
+    margin-top: 15px;
+
+    letter-spacing: 6px;
+}
+
+.banner-content a {
+    display: inline-block;
+
+    margin-top: 30px;
+
+    padding: 15px 35px;
+
+    background: #111;
+    color: #fff;
+
+    text-decoration: none;
+
+    letter-spacing: 2px;
+}
+
+
+/* ===========================
+   PRODUCTS
+=========================== */
+
+.products-section {
+    padding: 35px 5% 80px;
+}
+
+.section-heading {
+    margin-bottom: 40px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+}
+
+.section-heading p {
+    margin-top: 8px;
+
+    color: #777;
+}
+
+.product-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 30px;
+}
+
+.product {
+    min-width: 0;
+}
+
+.product-image-wrap {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #f5f5f5;
+
+    aspect-ratio: 1 / 1.18;
+}
+
+.main-product-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        opacity .35s ease,
+        filter .35s ease;
+}
+
+
+/* ===========================
+   SOLD OUT
+=========================== */
+
+.sold-out-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(20px, 3vw, 32px);
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    color: #111;
+
+    pointer-events: none;
+}
+
+.product.sold-out
+.main-product-image {
+    opacity: 0.22;
+
+    filter: grayscale(35%);
+}
+
+.product.sold-out
+.sold-out-overlay {
+    display: flex;
+}
+
+.product.sold-out
+.thumbnail {
+    opacity: 0.25;
+}
+
+.product.sold-out
+.add-cart-button {
+    background: #d7d7d7;
+
+    color: #888;
+
+    cursor: not-allowed;
+}
+
+
+/* ===========================
+   PRODUCT INFO
+=========================== */
+
+.product-info {
+    padding-top: 15px;
+}
+
+.product-type {
+    color: #999;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+.product-info h3 {
+    margin-top: 7px;
+
+    font-size: 17px;
+}
+
+.price {
+    display: block;
+
+    margin: 12px 0 17px;
+
+    font-size: 18px;
+}
+
+.product-info label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+}
+
+.product-info select {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 12px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+}
+
+.add-cart-button {
+    width: 100%;
+
+    min-height: 44px;
+
+    border: 0;
+
+    background: #111;
+    color: #fff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ===========================
+   THUMBNAILS
+=========================== */
+
+.thumbnails {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 8px;
+}
+
+.thumbnail {
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+}
+
+.active-thumbnail {
+    border-color: #111;
+}
+
+.image-count {
+    position: absolute;
+
+    right: 12px;
+    bottom: 12px;
+
+    background: rgba(0, 0, 0, .7);
+    color: #fff;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    z-index: 5;
+}
+
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, .55);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+
+    width: min(500px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    background: #fff;
+}
+
+.close-button {
+    position: absolute;
+
+    right: 15px;
+    top: 10px;
+
+    border: 0;
+
+    background: transparent;
+
+    font-size: 32px;
+
+    cursor: pointer;
+}
+
+.modal-box h2 {
+    margin-bottom: 25px;
+}
+
+.cart-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item p {
+    margin-top: 5px;
+
+    color: #777;
+}
+
+.remove-button {
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    text-decoration: underline;
+}
+
+.empty-cart {
+    padding: 30px 0;
+
+    text-align: center;
+
+    color: #888;
+}
+
+.total-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    font-size: 20px;
+}
+
+.checkout-button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: 0;
+
+    background: #111;
+    color: #fff;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* ===========================
+   CHECKOUT
+=========================== */
+
+.checkout-box label {
+    display: block;
+
+    margin: 14px 0 6px;
+}
+
+.checkout-box input,
+.checkout-box textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    font: inherit;
+}
+
+.checkout-box textarea {
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+.province-status {
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #777;
+}
+
+.province-status.success {
+    color: green;
+}
+
+.province-status.error {
+    color: #d40000;
+}
+
+.shipping-name {
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #f4f4f4;
+}
+
+.checkout-summary {
+    margin-top: 20px;
+}
+
+.checkout-summary > div {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+}
+
+.checkout-grand-total {
+    margin-top: 8px;
+
+    padding-top: 15px !important;
+
+    border-top: 1px solid #ddd;
+
+    font-size: 19px;
+}
+
+.success-box {
+    text-align: center;
+}
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer {
+    padding: 50px 5%;
+
+    text-align: center;
+
+    background: #FE4938;
+
+    color: #fff;
+}
+
+.footer-logo {
+    font-size: 24px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+}
+
+footer p {
+    margin-top: 12px;
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 900px) {
+
+    .product-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    header {
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .categories {
+        overflow-x: auto;
+
+        justify-content: flex-start;
+    }
+
+    .banner {
+        min-height: 320px;
+
+        margin: 15px;
+    }
+
+    .banner-content h1 {
+        font-size: 34px;
+
+        letter-spacing: 3px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 15px;
+    }
+
+    .product-info h3 {
+        font-size: 14px;
+    }
+
+}
+
 /* ==================================================
    WHATDOUBTS STOCK / SOLD OUT
 ================================================== */
