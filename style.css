@@ -1195,3 +1195,36 @@ body footer h3,
 body footer p {
     color: #ffffff !important;
 }
+
+.product-image-wrap {
+    position: relative;
+}
+
+.product.sold-out .main-product-image {
+    opacity: 0.28;
+    filter: grayscale(20%);
+}
+
+.sold-out-label {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #111;
+}
+
+.product.sold-out .sold-out-label {
+    display: flex;
+}
+
+.product.sold-out .add-cart-button {
+    background: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
