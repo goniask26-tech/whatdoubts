@@ -2208,3 +2208,138 @@ body {
     font-size: 16px;
     color: #111;
 }
+
+/* ==========================================
+   LOOKBOOK
+========================================== */
+
+.lookbook-section {
+    width: 90%;
+    max-width: 1500px;
+
+    margin: 70px auto 90px;
+}
+
+.lookbook-heading {
+    margin-bottom: 24px;
+}
+
+.lookbook-heading p {
+    margin: 0 0 6px;
+
+    font-size: 12px;
+    letter-spacing: 4px;
+
+    color: #888;
+}
+
+.lookbook-heading h2 {
+    margin: 0;
+
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+/* GRID */
+
+.lookbook-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr;
+
+    grid-template-rows:
+        320px 320px;
+
+    gap: 14px;
+}
+
+/* รูปใหญ่ */
+
+.lookbook-large {
+    grid-row: 1 / 3;
+}
+
+/* รูป */
+
+.lookbook-item {
+    overflow: hidden;
+
+    background: #f3f3f3;
+
+    cursor: pointer;
+}
+
+.lookbook-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease,
+        filter .3s ease;
+}
+
+.lookbook-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(.92);
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    .lookbook-grid {
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            420px 260px 260px;
+    }
+
+    .lookbook-large {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .lookbook-section {
+        width: calc(100% - 28px);
+
+        margin:
+            45px auto 60px;
+    }
+
+    .lookbook-heading h2 {
+        font-size: 28px;
+    }
+
+    .lookbook-grid {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            320px 180px 180px;
+
+        gap: 7px;
+    }
+
+    .lookbook-large {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+
+}
