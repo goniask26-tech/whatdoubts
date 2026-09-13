@@ -518,8 +518,11 @@ const products = [
     weight: 650,
 
     colors: [
-        "Jort camo pixel heart",
-    ],
+    {
+        name: "Jort camo pixel heart",
+        key: "camo"
+    }
+],
 
     images: [
         "images/S__59162639_0.jpg",
@@ -637,16 +640,27 @@ function findProduct(productId) {
 
 function getColorName(color) {
 
-    if (color === "Black") {
-        return "ดำ";
+    if (!color) {
+        return "";
     }
 
-    if (color === "White") {
-        return "ขาว";
+    // รองรับแบบเก่า เช่น "Black", "White"
+    if (typeof color === "string") {
+
+        if (color === "Black") {
+            return "ดำ";
+        }
+
+        if (color === "White") {
+            return "ขาว";
+        }
+
+        return color;
     }
 
-    return color;
-
+    // รองรับแบบใหม่
+    // { name: "Jort camo pixel heart", key: "camo" }
+    return color.name || "";
 }
 
 
@@ -664,7 +678,7 @@ function getColorName(color) {
 
 function getStockField(
     product,
-    color,
+    colorKey,
     size
 ) {
 
@@ -675,7 +689,8 @@ function getStockField(
 
         return (
             "stock" +
-            color +
+            colorKey.charAt(0).toUpperCase() +
+            colorKey.slice(1) +
             size
         );
 
@@ -685,7 +700,6 @@ function getStockField(
         "stock" +
         size
     );
-
 }
 
 
@@ -737,15 +751,9 @@ function renderProducts() {
                     function(color) {
 
                         options += `
-
-                            <option
-                                value="${color}"
-                            >
-
-                                ${getColorName(color)}
-
+                            <option value="${color.key}">
+                                ${color.name}
                             </option>
-
                         `;
 
                     }
