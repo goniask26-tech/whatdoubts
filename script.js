@@ -45,8 +45,8 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Faded",
+        "Black"
     ],
 
     images: [
@@ -73,8 +73,7 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Black"
     ],
 
     images: [
@@ -149,7 +148,6 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
         "White"
     ],
 
@@ -203,8 +201,9 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Germany",
+        "France",
+        "Spain"
     ],
 
     images: [
@@ -230,8 +229,8 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Oranger&White",
+        "Grey&Blue"
     ],
 
     images: [
@@ -255,8 +254,8 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Grey",
+        "Blue"
     ],
 
     images: [
@@ -286,8 +285,12 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Charcoal",
+        "Faded lilac",
+        "Raw white",
+        "Forest green",
+        "Sandtone",
+        "Steel blue"
     ],
 
     images: [
@@ -312,7 +315,6 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
         "White"
     ],
 
@@ -335,7 +337,6 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
         "White"
     ],
 
@@ -362,8 +363,7 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Faded",
     ],
 
     images: [
@@ -384,7 +384,6 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
         "White"
     ],
 
@@ -406,8 +405,7 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "England",
     ],
 
     images: [
@@ -429,8 +427,9 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Argentina",
+        "Brazil",
+        "Portugal"
     ],
 
     images: [
@@ -458,8 +457,7 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Faded",
     ],
 
     images: [
@@ -479,8 +477,7 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        "Ruud Gullit",
     ],
 
     images: [
@@ -506,7 +503,9 @@ const products = [
     price: 590,
     weight: 650,
 
-    colors: [],
+    colors: [
+        "Jort camo pixel heart",
+    ],
 
     images: [
         "images/S__59162639_0.jpg",
@@ -525,7 +524,10 @@ const products = [
     price: 650,
     weight: 650,
 
-    colors: [],
+    colors: [
+        "Midnigt black",
+        "Balsam blue",
+    ],
 
     images: [
         "images/51cecfecdce44b7fb78671bb88d9b867~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -547,7 +549,9 @@ const products = [
     price: 650,
     weight: 650,
 
-    colors: [],
+    colors: [
+        "Faded",
+    ],
 
     images: [
         "images/46f95ec35f40427881adc828a189c8f0~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -567,7 +571,9 @@ const products = [
     price: 650,
     weight: 650,
 
-    colors: [],
+    colors: [
+        "Faded",
+    ],
 
     images: [
         "images/58795f5206be456f9caef0f6ea296b7d~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -994,34 +1000,20 @@ function renderProducts() {
 
                         ${colorHTML}
 
+                            <label>
+                                ไซซ์
+                            </label>
 
-                        <label>
-                            ไซซ์
-                        </label>
-
-
-                        <select
-                            class="size-select"
-                            id="size-${product.id}"
-                        >
-
-                            <option value="S">
-                                S
-                            </option>
-
-                            <option value="M">
-                                M
-                            </option>
-
-                            <option value="L">
-                                L
-                            </option>
-
-                            <option value="XL">
-                                XL
-                            </option>
-
-                        </select>
+                            <select
+                                class="size-select"
+                                id="size-${product.id}"
+                            >
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                
+                            </select>
 
 
                         <button
