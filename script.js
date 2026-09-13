@@ -59,9 +59,16 @@ const products = [
     weight: 300,
 
     colors: [
-        "Faded",
-        "Black"
-    ],
+    {
+        name: "Faded",
+        key: "Faded"
+    },
+        {
+        name: "Black",
+        key: "black"
+    },
+    
+],
 
     images: [
         "images/e8b126442fbd4573b3f622d65b83c7ee~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -87,8 +94,12 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black"
-    ],
+    {
+        name: "Black",
+        key: "black"
+    },
+    
+],
 
     images: [
         "images/ba251fe5fb344c1ebe14d20087b11470~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -111,9 +122,15 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
-    ],
+    {
+        name: "Black",
+        key: "black"
+    },
+    {
+        name: "White",
+        key: "white"
+    }
+],
 
     images: [
         "images/58935376753647808a7719619d433418~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -137,8 +154,14 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        {
+            name: "Black",
+            key: "black"
+        },
+        {
+            name: "White",
+            key: "white"
+        }
     ],
 
     images: [
@@ -162,7 +185,10 @@ const products = [
     weight: 300,
 
     colors: [
-        "White"
+        {
+            name: "White",
+            key: "white"
+        }
     ],
 
     images: [
@@ -187,10 +213,15 @@ const products = [
     weight: 300,
 
     colors: [
-        "Black",
-        "White"
+        {
+            name: "Black",
+            key: "black"
+        },
+        {
+            name: "White",
+            key: "white"
+        }
     ],
-
     images: [
         "images/f0a5a6c676d046b2a064179d21e3cf4d~tplv-aphluv4xwc-resize-webp_800_800.jpg",
 
@@ -215,10 +246,19 @@ const products = [
     weight: 300,
 
     colors: [
-        "Germany",
-        "France",
-        "Spain"
-    ],
+        {
+            name: "Germany",
+            key: "Germany"
+        },
+        {
+            name: "France",
+            key: "France"
+        },
+        {
+            name: "Spain",
+            key: "Spain"
+        },
+],
 
     images: [
         "images/f1ec52dac2144d5ba114a41b6dde7407~tplv-aphluv4xwc-resize-webp_705_940.jpg",
@@ -243,9 +283,15 @@ const products = [
     weight: 300,
 
     colors: [
-        "Oranger&White",
-        "Grey&Blue"
-    ],
+        {
+            name: "Orange & White",
+            key: "orangewhite"
+        },
+        {
+            name: "Grey & Blue",
+            key: "greyblue"
+        }
+],
 
     images: [
         "images/ce995127c35d44308c75e862854fd7d1~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -268,9 +314,15 @@ const products = [
     weight: 300,
 
     colors: [
-        "Grey",
-        "Blue"
-    ],
+        {
+            name:"Grey",
+            key: "Grey"
+        },
+        {
+            name:"Blue",
+            key: "Blue"
+        }
+],
 
     images: [
         "images/27da1b560a0f4a2daee9eae9c5e99493~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -299,13 +351,31 @@ const products = [
     weight: 300,
 
     colors: [
-        "Charcoal",
-        "Faded lilac",
-        "Raw white",
-        "Forest green",
-        "Sandtone",
-        "Steel blue"
-    ],
+        {
+            name: "Charcoal",
+            key: "charcoal"
+        },
+        {
+            name: "Faded lilac",
+            key: "lilac"
+        },
+        {
+            name: "Raw white",
+            key: "rawwhite"
+        },
+        {
+            name: "Forest green",
+            key: "forestgreen"
+        },
+        {
+            name: "Sandtone",
+            key: "sandtone"
+        },
+        {
+            name: "Steel blue",
+            key: "steelblue"
+        }
+],
 
     images: [
         "images/52aa0df5be80463096faa29c885c8421~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -329,8 +399,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "White"
-    ],
+        {
+            name: "white",
+            key: "white"
+        }
+],
 
     images: [
         "images/d2c4f655372c4f6cb104dc62ecd0b093~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -351,8 +424,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "White"
-    ],
+        {
+            name: "white",
+            key: "white"
+        }
+],
 
     images: [
         "images/8647c90d8c7046718e9884cccee540c5~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -377,8 +453,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "Faded",
-    ],
+        {
+            name: "Faded",
+            key: "faded"
+        }
+],
 
     images: [
         "images/2c9c57b74f2c4f18b010d6edf921c4d4~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -398,8 +477,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "White"
-    ],
+        {
+            name: "white",
+            key: "white"
+        }
+],
 
     images: [
         "images/01149e7dff354810bd7bf459dce86ba8~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -418,9 +500,12 @@ const products = [
     price: 390,
     weight: 300,
 
-    colors: [
-        "England",
-    ],
+colors: [
+    {
+        name: "England",
+        key: "England"
+    }
+],
 
     images: [
         "images/ad6e055bb2af4b90b89995144175cf7b~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -440,11 +525,20 @@ const products = [
     price: 390,
     weight: 300,
 
-    colors: [
-        "Argentina",
-        "Brazil",
-        "Portugal"
-    ],
+colors: [
+    {
+        name: "Argentina",
+        key: "argentina"
+    },
+    {
+        name: "Brazil",
+        key: "brazil"
+    },
+    {
+        name: "Portugal",
+        key: "portugal"
+    }
+],
 
     images: [
         "images/480c9a47a9cc46ee826a9ef653ef7440~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -471,8 +565,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "Faded",
-    ],
+    {
+        name: "Faded",
+        key: "faded"
+    }
+],
 
     images: [
         "images/3b8b2078f1674abd8589190a1cc5e865~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -491,8 +588,11 @@ const products = [
     weight: 300,
 
     colors: [
-        "Ruud Gullit",
-    ],
+    {
+        name: "Ruud Gullit",
+        key: "Ruud Gullit"
+    }
+],
 
     images: [
         "images/0ee2e76578e64077a44f16d4d9b3b9e8~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -542,9 +642,13 @@ const products = [
     weight: 650,
 
     colors: [
-        "Midnigt black",
-        "Balsam blue",
-    ],
+    {
+        name: "Midnigt black",
+        key: "black",
+        name: "Balsam blue",
+        key: "blue",
+    }
+],
 
     images: [
         "images/51cecfecdce44b7fb78671bb88d9b867~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -567,8 +671,11 @@ const products = [
     weight: 650,
 
     colors: [
-        "Faded",
-    ],
+    {
+        name: "Faded",
+        key: "faded"
+    }
+],
 
     images: [
         "images/46f95ec35f40427881adc828a189c8f0~tplv-aphluv4xwc-resize-webp_800_800.jpg",
@@ -589,8 +696,11 @@ const products = [
     weight: 650,
 
     colors: [
-        "Faded",
-    ],
+    {
+        name: "Faded",
+        key: "faded"
+    }
+],
 
     images: [
         "images/58795f5206be456f9caef0f6ea296b7d~tplv-aphluv4xwc-resize-webp_800_800.jpg",
