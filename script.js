@@ -16,6 +16,20 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+// ================================
+// TEST FIREBASE CONNECTION
+// ================================
+
+db.collection("products")
+    .limit(1)
+    .get()
+    .then((snapshot) => {
+        console.log("✅ FIREBASE CONNECTED");
+        console.log("Products found:", snapshot.size);
+    })
+    .catch((error) => {
+        console.error("❌ FIREBASE ERROR:", error);
+    });
 
 // ==================================================
 // PRODUCT DATA
