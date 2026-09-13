@@ -54,8 +54,8 @@ const products = [
     id: "shirt1",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 01",
-    price: 390,
+    name: "whatdoubts | sweet chrome long sleeve",
+    price: 1290,
     weight: 300,
 
     colors: [
@@ -89,8 +89,8 @@ const products = [
     id: "shirt2",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 02",
-    price: 390,
+    name: "whatdoubts | JE?US faded long sleeve tee | boxy",
+    price: 1290,
     weight: 300,
 
     colors: [
@@ -117,8 +117,8 @@ const products = [
     id: "shirt3",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 03",
-    price: 390,
+    name: "whatdoubts | just legacy Waffle long sleeve 2026",
+    price: 1090,
     weight: 300,
 
     colors: [
@@ -149,8 +149,8 @@ const products = [
     id: "shirt4",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 04",
-    price: 390,
+    name: "whatdoubts | basic logo Waffle pocket long sleeve 2026",
+    price: 1290,
     weight: 300,
 
     colors: [
@@ -180,8 +180,8 @@ const products = [
     id: "shirt5",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 05",
-    price: 390,
+    name: "WD Rage long sleeve tee | white",
+    price: 890,
     weight: 300,
 
     colors: [
@@ -208,8 +208,8 @@ const products = [
     id: "shirt6",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 06",
-    price: 390,
+    name: "whatdoubts | Balance in Chaos long and short sleeve | black and white",
+    price: 790,
     weight: 300,
 
     colors: [
@@ -241,8 +241,8 @@ const products = [
     id: "shirt7",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 07",
-    price: 390,
+    name: "WHATDOUBTS Striped Polo Long sleeve",
+    price: 1490,
     weight: 300,
 
     colors: [
@@ -278,8 +278,8 @@ const products = [
     id: "shirt8",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 08",
-    price: 390,
+    name: "Whatdoubts Two tone long sleeve y2k style",
+    price: 890,
     weight: 300,
 
     colors: [
@@ -309,8 +309,8 @@ const products = [
     id: "shirt9",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 09",
-    price: 390,
+    name: "whatdoubts | quarter-zip sweatshirt | navy blue & grey",
+    price: 1290,
     weight: 300,
 
     colors: [
@@ -346,8 +346,8 @@ const products = [
     id: "shirt10",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 10",
-    price: 390,
+    name: "Whatdoubts vintage Ringer tees basic 2026",
+    price: 1090,
     weight: 300,
 
     colors: [
@@ -394,8 +394,8 @@ const products = [
     id: "shirt11",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 11",
-    price: 390,
+    name: "Whatdoubts | No Script No Second Take Graphic Pocket Tee",
+    price: 890,
     weight: 300,
 
     colors: [
@@ -419,8 +419,8 @@ const products = [
     id: "shirt12",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 12",
-    price: 390,
+    name: "Whatdoubts CIGARETTE$ Before Idea Graphic Boxy Tee",
+    price: 890,
     weight: 300,
 
     colors: [
@@ -448,8 +448,8 @@ const products = [
     id: "shirt13",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 13",
-    price: 390,
+    name: "WHATDOUBTS Logo England Graphic Tee",
+    price: 890,
     weight: 300,
 
     colors: [
@@ -472,8 +472,8 @@ const products = [
     id: "shirt14",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 14",
-    price: 390,
+    name: "Whatdoubts Special tee 01",
+    price: 790,
     weight: 300,
 
     colors: [
@@ -496,8 +496,8 @@ const products = [
     id: "shirt15",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 15",
-    price: 390,
+    name: "WHATDOUBTS England Overprint Tee | White",
+    price: 890,
     weight: 300,
 
 colors: [
@@ -521,8 +521,8 @@ colors: [
     id: "shirt16",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 16",
-    price: 390,
+    name: "WHATDOUBTS POLO BOXY l INVISIBLE TRAINING",
+    price: 1090,
     weight: 300,
 
 colors: [
@@ -560,8 +560,8 @@ colors: [
     id: "shirt17",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 17",
-    price: 390,
+    name: "Whatdoubt grunge faded tee | boxy",
+    price: 790,
     weight: 300,
 
     colors: [
@@ -583,14 +583,14 @@ colors: [
     id: "shirt18",
     category: "shirt",
     type: "SHIRT",
-    name: "WHATDOUBTS T-Shirt 18",
-    price: 390,
+    name: "WHATDOUBTS Ruud Gullit Tribute Tee",
+    price: 890,
     weight: 300,
 
     colors: [
     {
         name: "Ruud Gullit",
-        key: "Ruud Gullit"
+        key: "Ruudgullit"
     }
 ],
 
@@ -613,7 +613,7 @@ colors: [
     id: "pants1",
     category: "pants",
     type: "PANTS",
-    name: "WHATDOUBTS Pants 01",
+    name: "WHATDOUBTS jort camo pixel heart",
     price: 590,
     weight: 650,
 
@@ -637,7 +637,7 @@ colors: [
     id: "pants2",
     category: "pants",
     type: "PANTS",
-    name: "WHATDOUBTS Pants 02",
+    name: "Whatdoubts Engineered jeans Balsam blue - Midnight black",
     price: 650,
     weight: 650,
 
@@ -666,7 +666,7 @@ colors: [
     id: "pants3",
     category: "pants",
     type: "PANTS",
-    name: "WHATDOUBTS Pants 03",
+    name: "Soldtheworlds tapered jeans | vintage faded",
     price: 650,
     weight: 650,
 
@@ -691,7 +691,7 @@ colors: [
     id: "pants4",
     category: "pants",
     type: "PANTS",
-    name: "WHATDOUBTS Pants 04",
+    name: "Soldtheworlds 5/10 Jorts | vintage faded",
     price: 650,
     weight: 650,
 
